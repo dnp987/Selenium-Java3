@@ -14,13 +14,23 @@ public class App {
         System.out.println(actual_page_title);
         actual_page_title = driver.getTitle();
 
+        /*
+         * if (actual_page_title.equals(expected_page_title)) {
+         * System.out.println("Page title matches the expected page title");
+         * } else {
+         * System.out.println("Page title does not match the expected_page_title");
+         * }
+         */
+        check_page_title(expected_page_title, actual_page_title);
+        driver.close();
+        driver.quit();
+    }
+
+    public static void check_page_title(String expected_page_title, String actual_page_title) {
         if (actual_page_title.equals(expected_page_title)) {
             System.out.println("Page title matches the expected page title");
         } else {
             System.out.println("Page title does not match the expected_page_title");
         }
-
-        driver.close();
-        driver.quit();
     }
 }
