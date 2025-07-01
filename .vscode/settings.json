@@ -71,6 +71,14 @@
         "c:\\Selenium\\selenium-java.3.4.0\\selenium-safari-driver-4.34.0.jar",
         "c:\\Selenium\\selenium-java.3.4.0\\selenium-safari-driver-4.34.0-sources.jar",
         "c:\\Selenium\\selenium-java.3.4.0\\selenium-support-4.34.0.jar",
-        "c:\\Selenium\\selenium-java.3.4.0\\selenium-support-4.34.0-sources.jar"
+        "c:\\Selenium\\selenium-java.3.4.0\\selenium-support-4.34.0-sources.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-examples-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-excelant-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-javadoc-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-ooxml-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-ooxml-full-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-ooxml-lite-5.2.3.jar",
+        "c:\\Selenium\\apache-poi\\poi-bin-5.2.3\\poi-scratchpad-5.2.3.jar"
     ]
 }
