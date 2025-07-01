@@ -30,6 +30,9 @@ public class App {
         cell = row.getCell(0);
         expected_page_title = cell.getStringCellValue();
 
+        workbook.close();
+        fs.close();
+
         WebDriver driver = new ChromeDriver();
         driver.get(test_sight);
         actual_page_title = driver.getTitle();
