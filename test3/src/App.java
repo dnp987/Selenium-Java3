@@ -20,10 +20,15 @@ public class App {
         FileInputStream fs = new FileInputStream(
                 "C:\\Users\\dpenn\\Desktop\\Projects\\selenium-java3\\test3\\java_test1.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fs);
-        XSSFSheet sheet = workbook.getSheetAt(0);
+        XSSFSheet sheet = workbook.getSheet("Sheet1");
+
         Row row = sheet.getRow(0);
         Cell cell = row.getCell(0);
-        System.out.println(sheet.getRow(0).getCell(0));
+        test_sight = cell.getStringCellValue();
+
+        row = sheet.getRow(1);
+        cell = row.getCell(0);
+        expected_page_title = cell.getStringCellValue();
 
         WebDriver driver = new ChromeDriver();
         driver.get(test_sight);
