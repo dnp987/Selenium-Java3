@@ -1,5 +1,14 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import java.io.FileInputStream;
+import java.io.IOException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -8,6 +17,14 @@ public class App {
         String actual_page_title;
         System.out.println("Hello, World!");
         System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver.exe");
+        FileInputStream fs = new FileInputStream(
+                "C:\\Users\\dpenn\\Desktop\\Projects\\selenium-java3\\test3\\java_test1.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fs);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        Row row = sheet.getRow(0);
+        Cell cell = row.getCell(0);
+        System.out.println(sheet.getRow(0).getCell(0));
+
         WebDriver driver = new ChromeDriver();
         driver.get(test_sight);
         actual_page_title = driver.getTitle();
