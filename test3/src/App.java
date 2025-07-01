@@ -10,6 +10,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+// Simple Selenium Java test, proof of concept
 public class App {
     public static void main(String[] args) throws Exception {
         String test_sight = "https://www.tsx.com";
