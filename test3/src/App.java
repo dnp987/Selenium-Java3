@@ -1,46 +1,32 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import java.io.FileInputStream;
-import java.io.IOException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 // Simple Selenium Java test, proof of concept
 public class App {
     public static void main(String[] args) throws Exception {
-        String test_sight = "https://www.tsx.com";
         String expected_page_title = "TMX TSX | TSXV - Toronto Stock Exchange and TSX Venture Exchange";
         String actual_page_title;
-        System.out.println("Hello, World!");
+        String baseURL = "";
+
+        System.out.println("Get a TSX Quote test");
         System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver.exe");
-        FileInputStream fs = new FileInputStream(
-                "C:\\Users\\dpenn\\Desktop\\Projects\\selenium-java3\\test3\\java_test1.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook(fs);
-        XSSFSheet sheet = workbook.getSheet("Sheet1");
-
-        Row row = sheet.getRow(0);
-        Cell cell = row.getCell(0);
-        test_sight = cell.getStringCellValue();
-
-        row = sheet.getRow(1);
-        cell = row.getCell(0);
-        expected_page_title = cell.getStringCellValue();
-
-        workbook.close();
-        fs.close();
+        excel_utils data_sheet_in = new excel_utils();
+        data_sheet_in.setExcelFileSheet("C:\\temp\\test-parameters.xlsx", "test_parameters", "in");
+        baseURL = data_sheet_in.getCell(1, 1);
+        expected_page_title = data_sheet_in.getCell(2, 1);
 
         WebDriver driver = new ChromeDriver();
-        driver.get(test_sight);
-        actual_page_title = driver.getTitle();
-        System.out.println(actual_page_title);
+        driver.get(baseURL);
         actual_page_title = driver.getTitle();
 
         check_page_title(expected_page_title, actual_page_title);
+        WebElement input_symbol = driver.findElement(By.id("global-search-input"));
+        input_symbol.sendKeys("BMO", Keys.RETURN);
 
         driver.close();
         driver.quit();
