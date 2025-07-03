@@ -1,17 +1,20 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebElement;
+import java.time.*;
 
 // Simple Selenium Java test, proof of concept
 public class App {
     public static void main(String[] args) throws Exception {
-        String expected_page_title = "TMX TSX | TSXV - Toronto Stock Exchange and TSX Venture Exchange";
+        String expected_page_title = "TMX Money | TSX Today | Canadian Stock Market";
         String actual_page_title;
         String baseURL = "";
+        String symbol = "";
 
         System.out.println("Get a TSX Quote test");
         System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\chromedriver-win64\\chromedriver.exe");
@@ -20,13 +23,23 @@ public class App {
         baseURL = data_sheet_in.getCell(1, 1);
         expected_page_title = data_sheet_in.getCell(2, 1);
 
+        excel_utils test_symbols = new excel_utils();
+        test_symbols.setExcelFileSheet("C:\\temp\\test-parameters.xlsx", "symbols", "in");
+        symbol = test_symbols.getCell(1, 0);
+
         WebDriver driver = new ChromeDriver();
         driver.get(baseURL);
+        driver.manage().window().maximize();
         actual_page_title = driver.getTitle();
 
         check_page_title(expected_page_title, actual_page_title);
         WebElement input_symbol = driver.findElement(By.id("global-search-input"));
-        input_symbol.sendKeys("BMO", Keys.RETURN);
+        try {
+            input_symbol.sendKeys(symbol, Keys.RETURN);
+        } catch (StaleElementReferenceException e) {
+            input_symbol = driver.findElement(By.id("global-search-input"));
+        }
+        input_symbol.sendKeys(symbol, Keys.RETURN);
 
         driver.close();
         driver.quit();
